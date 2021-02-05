@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=FractalMan
+Comment=Python tool to generate fractals
+GenericName=Internet Messenger
+Exec=/usr/bin/fractalman
+Icon=fractalman
+Type=Application
+Categories=Network;InstantMessaging;
+Path=/usr/bin
+Path=/usr/bin
