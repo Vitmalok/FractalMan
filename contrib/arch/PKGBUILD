@@ -1,7 +1,6 @@
 # Maintainer: Alex Averyanov <averyanalex@gmail.com>
-
 pkgname=fractalman-git
-pkgver=r11.a577f7c
+pkgver=r12.d933046
 pkgrel=1
 pkgdesc="Python tool to generate fractals"
 arch=('any')
@@ -13,12 +12,10 @@ conflicts=('fractalman')
 provides=('fractalman')
 source=("FractalMan::git+https://github.com/Vitmalok/FractalMan.git")
 sha256sums=('SKIP')
-
 pkgver() {
     cd FractalMan
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
-
 
 package() {
     cd "$srcdir/FractalMan"
