@@ -231,13 +231,18 @@ def modify_img():
     progress = None
 
 
-def set_zoom(event):
+def zoom_in(event):
     global zoom
 
-    if event.delta > 0:
-        zoom *= zoomc ** (event.delta / 120)
-    else:
-        zoom /= zoomc ** (event.delta / -120)
+    zoom *= zoomc
+
+    modify_img()
+
+
+def zoom_out(event):
+    global zoom
+
+    zoom /= zoomc
 
     modify_img()
 
@@ -621,7 +626,8 @@ if 'video.txt' in os.listdir('.'):
                 VERSION +
                 '    Vitmalok    - Режим видео')
 
-panel.bind('<MouseWheel>', set_zoom)
+image_window.bind('<0>', zoom_in)
+image_window.bind('<9>', zoom_out)
 panel.bind('<ButtonRelease-1>', set_center)
 panel.bind('<Button-1>', set_flag)
 
