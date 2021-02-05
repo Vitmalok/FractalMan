@@ -7,7 +7,7 @@ import PIL
 from time import time as tm
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from tkinter import ttk
-VERSION = 'V 0.16.0'
+VERSION = 'V 0.16.1'
 
 www = 800  # Длина картинки
 hhh = 640  # Ширина картинки
@@ -250,18 +250,10 @@ def zoom_out(event):
 def set_center(event):
     global cx, cy
 
-    cx += (event.x - fx) / zoom
-    cy += (event.y - fy) / zoom
+    cx -= (event.x - www / 2) / zoom
+    cy -= (event.y - hhh / 2) / zoom
 
     modify_img()
-
-
-def set_flag(event):
-    global fx, fy
-
-    if event.num == 1:
-        fx = event.x
-        fy = event.y
 
 
 def set_mxi(event):
@@ -629,7 +621,6 @@ if 'video.txt' in os.listdir('.'):
 image_window.bind('<0>', zoom_in)
 image_window.bind('<9>', zoom_out)
 panel.bind('<ButtonRelease-1>', set_center)
-panel.bind('<Button-1>', set_flag)
 
 image_window.after(200, modify_img)
 
