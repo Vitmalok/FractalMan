@@ -7,9 +7,6 @@ import PIL
 from time import time as tm
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from tkinter import ttk
-print('Пожалуйста, подождите:\n  Программа запускается...')
-
-
 VERSION = 'V 0.16.0'
 
 www = 800  # Длина картинки
@@ -80,9 +77,9 @@ def vopros(xx, yy, ww, hh):
 
     return mxi
 
-    '''dist = (abs (z.real) ** 2 + abs (z.imag) ** 2) ** 0.5
+    # '''dist = (abs (z.real) ** 2 + abs (z.imag) ** 2) ** 0.5
 
-    return max (4 - dist, 0) / 2'''
+    # return max (4 - dist, 0) / 2'''
 
 
 def color(n, m):
@@ -168,8 +165,6 @@ def kartinka():
 
     y = 0
 
-    ntm = tm()
-
     colors = [color(q, mxi) for q in range(mxi + 1)]
 
     while y < int(height // 1):
@@ -199,7 +194,7 @@ def kartinka():
 
         progress['value'] = prg
         q = str(round(progress['value'], 3)).split('.')
-        lpr['text'] = 'Генерация изображения...    ' + \
+        lpr['text'] = 'Generating image...    ' + \
             q[0] + '.' + q[1].ljust(3, '0') + ' %'
         image_window.update()
 
@@ -220,7 +215,7 @@ def modify_img():
     progress = ttk.Progressbar(image_window, length=300, value=0)
     progress.place(x=www + 25, y=hhh - 50)
 
-    lpr = tkinter.Label(bg=color2, text='Генерация изображения...    0 %')
+    lpr = tkinter.Label(bg=color2, text='Generating image...    0 %')
     lpr.place(x=www + 25, y=hhh - 71)
 
     imgag = kartinka()
@@ -415,7 +410,7 @@ def video(vid):
 
         progress_v['value'] = prg_v
         qq = str(round(progress_v['value'], 3)).split('.')
-        lpr_v['text'] = 'Генерация видео...    ' + qq[0] + '.' + \
+        lpr_v['text'] = 'Generating video...    ' + qq[0] + '.' + \
             qq[1].ljust(3, '0') + '%    ( ' + str(q + 1) + ' / ' + str(len(vidd)) + ' )'
 
         image_window.update()
@@ -427,7 +422,7 @@ def video(vid):
 
 
 image_window = tkinter.Tk()
-image_window.title('Фрактал Мандельброта    ' + VERSION + '    Vitmalok')
+image_window.title('Mandelbrot fractal    ' + VERSION + '    Vitmalok')
 image_window.geometry(str(www + 352) + 'x' + str(hhh + 4))
 image_window.resizable(False, False)
 image_window['bg'] = color2
@@ -450,7 +445,7 @@ colorbar.place(x=www + 40, y=330)
 scale1 = tkinter.Scale(
     image_window,
     orient=tkinter.HORIZONTAL,
-    length=230,
+    length=200,
     from_=0,
     to=12,
     bg=color1,
@@ -461,20 +456,20 @@ scale1.set(2)
 scale1.place(x=www + 40, y=400)
 
 s1 = tkinter.Label(image_window, text=str(mxi), bg=color2)
-s1.place(x=www + 280, y=420)
+s1.place(x=www + 260, y=420)
 
 nnn1 = tkinter.Label(
     image_window,
     width=39,
     bg=color2,
-    text='Количество итераций:',
+    text='Iterations:',
     anchor='w')
 nnn1.place(x=www + 40, y=400)
 
 scale2 = tkinter.Scale(
     image_window,
     orient=tkinter.HORIZONTAL,
-    length=230,
+    length=200,
     from_=-4,
     to=2,
     bg=color1,
@@ -485,13 +480,13 @@ scale2.set(-3)
 scale2.place(x=www + 40, y=450)
 
 s2 = tkinter.Label(image_window, text=str(mxi), bg=color2)
-s2.place(x=www + 280, y=470)
+s2.place(x=www + 260, y=470)
 
 nnn2 = tkinter.Label(
     image_window,
     width=39,
     bg=color2,
-    text='Разрешение:',
+    text='Resolution:',
     anchor='w')
 nnn2.place(x=www + 40, y=450)
 
@@ -515,9 +510,9 @@ lab.place(x=www + 40, y=20)
 
 svbt = tkinter.Button(
     image_window,
-    text='Сохранить изображение',
+    text='Save',
     height=2,
-    width=38,
+    width=32,
     bg=color1,
     activebackground=color1,
     command=lambda: save_image(imgag))
@@ -525,9 +520,9 @@ svbt.place(x=www + 40, y=160)
 
 upbt = tkinter.Button(
     image_window,
-    text='Обновить изображение',
+    text='Update',
     height=2,
-    width=38,
+    width=32,
     bg=color1,
     activebackground=color1,
     command=modify_img)
@@ -622,7 +617,7 @@ if 'video.txt' in os.listdir('.'):
             vibt.place(x=www + 40, y=260)
 
             image_window.title(
-                'Фрактал Мандельброта    ' +
+                'Mandelbrot fractal    ' +
                 VERSION +
                 '    Vitmalok    - Режим видео')
 
