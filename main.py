@@ -449,7 +449,7 @@ scale1 = tkinter.Scale(
     variable=mxxi,
     activebackground=color1,
     command=set_mxi)
-scale1.set(2)
+scale1.set(6)
 scale1.place(x=www + 40, y=400)
 
 s1 = tkinter.Label(image_window, text=str(mxi), bg=color2)
@@ -473,7 +473,7 @@ scale2 = tkinter.Scale(
     variable=biig,
     activebackground=color1,
     command=set_big)
-scale2.set(-3)
+scale2.set(-1)
 scale2.place(x=www + 40, y=450)
 
 s2 = tkinter.Label(image_window, text=str(mxi), bg=color2)
