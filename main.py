@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import math
-import threading
 import tkinter
 import os
 import PIL
