@@ -39,7 +39,7 @@ zy1 = 4
 fx = 0
 fy = 0
 
-progress = None
+progress = dict()
 lpr = None
 prg = 0
 
