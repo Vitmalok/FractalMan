@@ -7,6 +7,9 @@ import PIL
 from time import time as tm
 from PIL import Image, ImageDraw, ImageTk, ImageFilter
 from tkinter import ttk
+from numba import jit
+import numpy
+
 VERSION = 'V 0.16.1'
 
 www = 800  # Длина картинки
@@ -49,10 +52,8 @@ color3 = '#cc8822'
 
 busy = False
 
-
-def vopros(xx, yy, ww, hh):
-    global zx0, zy0, zx1, zy1, mxi, cx, cy, big, zoom, f_0
-
+@jit(cache=True, nopython=True)
+def vopros(xx: int, yy: int, ww: int, hh: int, zx0: numpy.float128, zy0: numpy.float128, zx1: numpy.float128, zy1: numpy.float128, mxi : numpy.float128, cx: numpy.float128, cy: numpy.float128, big: numpy.float128, zoom: numpy.float128, f_0: numpy.float128):
     ax = ((xx - ww * 0.5) / zoom + ww * 0.5 - (cx / big)) * 4 / ww
     ay = ((yy - hh * 0.5) / zoom + hh * 0.5 - (cy / big)) * 4 / ww
 
@@ -61,11 +62,8 @@ def vopros(xx, yy, ww, hh):
 
     for q in range(min(mxi, mxiop)):
         if z != 0:
-            try:
-                z = z ** f_0 + a
-                #z = complex (abs (z.real), abs (z.imag))
-            except BaseException:
-                print(z)
+            z = z ** f_0 + a
+            #z = complex (abs (z.real), abs (z.imag))
         else:
             z = a
 
@@ -80,7 +78,6 @@ def vopros(xx, yy, ww, hh):
     # '''dist = (abs (z.real) ** 2 + abs (z.imag) ** 2) ** 0.5
 
     # return max (4 - dist, 0) / 2'''
-
 
 def color(n, m):
     if COL_M == 0:
@@ -153,7 +150,7 @@ def convert(imgg, biggx, biggy, w, h):
 
 
 def kartinka():
-    global mxi, big, progress, prg, width, height
+    global mxi, big, progress, prg, width, height, zx0, zy0, zx1, zy1, mxi, cx, cy, big, zoom, f_0
 
     imgg = Image.new('RGB', (width, height))
     pix = imgg.load()
@@ -169,7 +166,7 @@ def kartinka():
 
     while y < int(height // 1):
         for x in range(int(width // 1)):
-            pix[x, y] = colors[vopros(x, y, width, height)]
+            pix[x, y] = colors[vopros(x, y, width, height, zx0, zy0, zx1, zy1, mxi, cx, cy, big, zoom, f_0)]
 
         y += 1
 
